@@ -1,0 +1,48 @@
+<!-- myapp/templates/cart.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .cart-container { display: flex; flex-direction: column; gap: 20px; }
+        .cart-item { display: flex; justify-content: space-between; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .cart-item img { width: 100px; height: auto; }
+        .btn { background-color: #28a745; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 5px; text-decoration: none; display: inline-block; }
+        .btn:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+    <h1>Your Cart</h1>
+
+    {% if products %}
+        <div class="cart-container">
+            {% for product in products %}
+                <div class="cart-item">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <div>
+                        <h3>{{ product.name }}</h3>
+                        <p>Price: ${{ product.price }}</p>
+                        <p>Quantity: {{ product.quantity }}</p>
+                    </div>
+                    <div>
+                        <a href="#" class="btn">Remove</a> <!-- You can add remove functionality later -->
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="total-price">
+                <h2>Total: ${{ total_price }}</h2>
+            </div>
+            <a href="#" class="btn">Proceed to Checkout</a> <!-- Link to checkout page -->
+           
+        </div>
+    {% else %}
+        <p>Your cart is empty!</p>
+    {% endif %}
+
+</body>
+</html>
